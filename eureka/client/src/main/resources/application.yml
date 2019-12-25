@@ -1,0 +1,95 @@
+yk:
+  profile: localhost
+  version: 1-0-0
+server:
+  port: 8888
+jasypt:
+  encryptor:
+    password: OUTREA
+spring:
+  application:
+    name: eureka-client-server-${haiercash.profile}-${haiercash.version}
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  session:
+    store-type: none
+  http:
+    converters:
+      preferred-json-mapper: jackson # json 转换器, 接收数据和请求数据时使用
+      preferred-xml-mapper: jackson # xml 转换器, 请求数据时使用
+    encoding:
+      force: true # 强制用 UTF-8 编码解析请求
+    multipart:
+      max-file-size: 10MB # 最大文件大小
+      max-request-size: 10MB # 最大请求大小
+  datasource:
+    url: jdbc:oracle:thin:@10.164.194.168:1521/haiercash
+    testWhileIdle: true
+    validationQuery: SELECT 1 from dual
+    username: base
+    password: ENC(TlfS0MAZtVOi86DVzH3Jvg==)
+    driverClassName: oracle.jdbc.OracleDriver
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
+  hadoop:
+      addresses: 10.164.204.89:5672
+      username: admin
+      password: admin
+      virtual-host: /
+      publisher-confirms: true
+mybatis:
+  dialect: com.haiercash.hco.common.mybatis.dialect.OracleDialect
+app:
+  rest:
+    APPCA: http://APPCA
+eureka:
+  client:
+    healthcheck.enabled: true
+    registerWithEureka: true
+    fetchRegistry: true
+    registryFetchIntervalSeconds: 5
+    eurekaServiceUrlPollIntervalSeconds: 120
+    serviceUrl:
+      defaultZone: http://10.164.197.208:1180/eureka/,http://10.164.197.209:1180/eureka/
+  instance:
+    instance-id: ${spring.application.name}@${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}(${spring.cloud.client.hostname})
+    hostname: localhost
+    prefer-ip-address: true
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+    securePortEnabled: false
+ribbon:
+  ConnectTimeout: 300000
+  ReadTimeout: 600000
+  MaxTotalHttpConnections: 5000
+  MaxHttpConnectionsPerHost: 5000
+  ActiveConnectionsLimit: 5000
+  OkToRetryOnAllOperations: true
+  MaxAutoRetriesNextServer: 1
+  MaxAutoRetries: 0
+  eureka:
+    enabled: true
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+#security:
+#  basic:
+#    enabled: false
+
+#静态资源读取路径
+location:
+  static: 'D:\\'
+
+
+externalHttp:
+  #通联
+  tonglian:
+    testTranURL: https://113.108.182.3/aipg/ProcessServlet
+    merchantId: '200604000000445'
+    pwd: '`12qwe'
+    pfxPassword: '111111'
+    pfxPath: 20060400000044502.p12
+    tltcerPath: 'allinpay-pds.cer'
+    userName: '20060400000044502'
+
+

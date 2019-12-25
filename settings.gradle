@@ -1,0 +1,10 @@
+rootProject.name = "demo"
+
+include 'eureka'
+
+include 'eureka:client'
+findProject(':eureka:client')?.name = 'client'
+
+include 'eureka:service'
+findProject(':eureka:service')?.name = 'service'
+
