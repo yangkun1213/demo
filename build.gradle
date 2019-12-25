@@ -17,7 +17,11 @@ buildscript {
     }
     repositories {
         mavenLocal()
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/"}
         mavenCentral()
+        jcenter()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
 //        maven { url 'http://10.164.194.139:8081/nexus/content/repositories/public/' }
     }
     dependencies {
@@ -52,8 +56,13 @@ allprojects {
 
 subprojects {
     repositories {
+
         mavenLocal()
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/"}
         mavenCentral()
+        jcenter()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
 //        maven { url 'http://10.164.194.139:8081/nexus/content/repositories/public/' }
 //        maven { url 'http://10.164.194.139:8081/nexus/content/repositories/thirdparty/' }
 //        if (releasePublish) {
