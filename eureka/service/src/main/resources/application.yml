@@ -2,13 +2,13 @@ yk:
   profile: localhost
   version: 1-0-0
 server:
-  port: 8888
+  port: 8889
 #jasypt:
 #  encryptor:
 #    password: OUTREA
 spring:
   application:
-    name: eureka-client-${yk.profile}-${yk.version}
+    name: eureka-server-${yk.profile}-${yk.version}
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
   session:
@@ -38,22 +38,16 @@ mybatis:
 app:
   rest:
     APPCA: http://APPCA
+#Eureka 相关配置
 eureka:
   client:
-    healthcheck.enabled: true
-    registerWithEureka: true
-    fetchRegistry: true
-    registryFetchIntervalSeconds: 5
-    eurekaServiceUrlPollIntervalSeconds: 120
-    serviceUrl:
-      defaultZone: http://10.164.197.208:1180/demo/,http://10.164.197.209:1180/demo/
-  instance:
-    instance-id: ${spring.application.name}@${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}(${spring.cloud.client.hostname})
-    hostname: localhost
-    prefer-ip-address: true
-    leaseRenewalIntervalInSeconds: 1
-    leaseExpirationDurationInSeconds: 2
-    securePortEnabled: false
+    service-url:
+      defaultZone: http://localhost:${server.port}/eureka/
+    # 是否从其他的服务中心同步服务列表
+    fetch-registry: false
+    # 是否把自己作为服务注册到其他服务注册中心
+    register-with-eureka: false
+
 ribbon:
   ConnectTimeout: 300000
   ReadTimeout: 600000

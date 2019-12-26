@@ -22,7 +22,6 @@ buildscript {
         jcenter()
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
-//        maven { url 'http://10.164.194.139:8081/nexus/content/repositories/public/' }
     }
     dependencies {
         classpath "io.spring.gradle:dependency-management-plugin:0.5.3.RELEASE"
@@ -56,20 +55,12 @@ allprojects {
 
 subprojects {
     repositories {
-
         mavenLocal()
         maven { url "http://maven.aliyun.com/nexus/content/groups/public/"}
         mavenCentral()
         jcenter()
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
-//        maven { url 'http://10.164.194.139:8081/nexus/content/repositories/public/' }
-//        maven { url 'http://10.164.194.139:8081/nexus/content/repositories/thirdparty/' }
-//        if (releasePublish) {
-//            maven { url 'http://10.164.194.139:8081/nexus/content/repositories/releases/' }
-//        } else {
-//            maven { url 'http://10.164.194.139:8081/nexus/content/repositories/snapshots/' }
-//        }
         flatDir {
             dirs 'lib'
         }
@@ -103,17 +94,64 @@ subprojects {
     }
 
     dependencies {
+
         //==依赖==
         compile('org.springframework.boot:spring-boot-starter')
+        compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+
+//        compile('org.springframework.boot:spring-boot-starter-security')
+        compile('org.springframework.boot:spring-boot-starter-mail')
+//        compile('org.springframework.cloud:spring-cloud-starter-oauth2')
+        compile('org.springframework.session:spring-session')
+
+
+
+        compile("org.apache.commons:commons-lang3:3.1")
+        // json
+        compile("com.alibaba:fastjson:1.2.16")
+        compile("org.json:json:20160212")
+        compile group: 'net.sf.json-lib', name: 'json-lib', version: '2.4', classifier: 'jdk15'
+
+
+
 
         // 数据库连接
         compile("org.springframework.boot:spring-boot-starter-jdbc")
-        //maven的仓库中ojdbc为收费,下载不下来
 //        compile("com.oracle:ojdbc6:11g")
 //        compile("com.bestvike:bv-mybatis:3.4.5.1")
 
-        compile("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final")
+        compile("mysql:mysql-connector-java")
 
+        compile("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final")
+        //数据库加密
+        compile 'com.github.ulisesbocchio:jasypt-spring-boot-starter:1.14'
+
+        //==运行时==
+//        runtime('org.springframework.boot:spring-boot-devtools')
+        //==编译时==
+        compileOnly('org.springframework.boot:spring-boot-configuration-processor')
+        compileOnly('org.projectlombok:lombok')
+        //==测试时==
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+        testCompile('org.springframework.security:spring-security-test')
+        testCompile('org.projectlombok:lombok')
+
+        compile("org.springframework.cloud:spring-cloud-starter-stream-rabbit")
+//    compile project(":hco-core:hco-config")
+        //feign
+        compile('org.springframework.cloud:spring-cloud-starter-feign')
+        //链路追踪
+        compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-ribbon'
+        compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth'
+//    compile group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '4.6'
+
+        //tools
+        compile group: 'com.google.guava', name: 'guava', version: '25.0-jre'
+        //日志平台
+//    compile group: 'com.github.danielwegener', name: 'logback-kafka-appender', version: '0.1.0'
+//    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.6'
+//    compile group: 'ch.qos.logback', name: 'logback-core', version: '1.1.6'
+//    compile group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '4.8'
     }
     [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 }
