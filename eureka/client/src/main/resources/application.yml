@@ -2,7 +2,7 @@ yk:
   profile: localhost
   version: 1-0-0
 server:
-  port: 8888
+  port: 8890
 #jasypt:
 #  encryptor:
 #    password: OUTREA
@@ -46,7 +46,7 @@ eureka:
     registryFetchIntervalSeconds: 5
     eurekaServiceUrlPollIntervalSeconds: 120
     serviceUrl:
-      defaultZone: http://10.164.197.208:1180/demo/,http://10.164.197.209:1180/demo/
+      defaultZone: http://localhost:8889/eureka/
   instance:
     instance-id: ${spring.application.name}@${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}(${spring.cloud.client.hostname})
     hostname: localhost

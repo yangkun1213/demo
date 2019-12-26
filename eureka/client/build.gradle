@@ -1,14 +1,26 @@
 group 'com.yk.demo'
 version '1.0.0'
 
-apply plugin: 'java'
 
-sourceCompatibility = 1.8
+apply plugin: 'org.springframework.boot'
+apply plugin: "io.spring.dependency-management"
 
-repositories {
-    mavenCentral()
+springBoot {
+    classifier = 'exec'
+}
+
+jar {
+    baseName = project.name
+    version = project.version
+    if (!project.releasePublish) {
+        version = version
+    }
+    println "profile: ${profile}"
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile("org.springframework.cloud:spring-cloud-starter-eureka")
 }
+apply from: '../../properties_replace.gradle'
+apply from: '../../installation_package.gradle'
+
